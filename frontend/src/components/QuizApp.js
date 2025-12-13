@@ -4,7 +4,8 @@ import quizData from '../quiz.json';
 import Snow from './Snow';
 
 const API_URL = process.env.NODE_ENV === 'production'
-    ? 'https://quiz-app-backend-sable.vercel.app/api'
+    //? 'https://quiz-app-backend-sable.vercel.app/api'
+    ? 'xmas-quiz-2025-edhpc1vxz-snabel93s-projects.vercel.app'
     : 'http://localhost:3000/api';
 
 const QuizApp = () => {
