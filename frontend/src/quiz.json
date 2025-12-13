@@ -1,0 +1,186 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the Italian Christmas Donkey called?",
+      "options": ["Jack", "Curtis", "Dominick", "Eeyore"],
+      "correctAnswer": "Dominick",
+      "image": "1.jpg"
+    },
+    {
+      "id": 2,
+      "question": "In Home Alone where were Kevin's family travelling on holiday to?",
+      "options": ["London", "Paris", "Rome", "New York"],
+      "correctAnswer": "Paris",
+      "image": "2.jpg"
+    },
+    {
+      "id": 3,
+      "question": "What kind of Christmas does Elvis sing about in his 1957 hit?",
+      "options": ["White", "Merry", "Rocking", "Blue"],
+      "correctAnswer": "White",
+      "image": "3.jpg"
+    },
+    {
+      "id": 4,
+      "question": "What is Bouche de Noel?",
+      "options": ["French Christmas log cake", "Belgian Candle", "Swiss Christmas Ornament", "Canadian Christmas drink"],
+      "correctAnswer": "French Christmas log cake",
+      "image": "4.jpg"
+    },
+    {
+      "id": 5,
+      "question": "Which city boasts the oldest Christmas market in Europe?",
+      "options": ["Munich", "Dresden", "Vienna", "Dusseldorf"],
+      "correctAnswer": "Dresden",
+      "image": "5.jpg"
+    },
+    {
+      "id": 6,
+      "question": "Good King Wenceslas was a king of Bohemia in the 10th century. What country is Bohemia now known as?",
+      "options": ["Croatia", "Bulgaria", "Hungary", "Czech Republic"],
+      "correctAnswer": "Czech Republic",
+      "image": "6.jpg"
+    },
+    {
+      "id": 8,
+      "question": "The dance of the sugar plum fairy is part of which ballet, often performed at Christmas time?",
+      "options": ["Sleeping Beauty", "Copellia", "The Nutcracker", "Cinderella"],
+      "correctAnswer": "The Nutcracker",
+      "image": "8.jpg"
+    },
+    {
+      "id": 9,
+      "question": "How many varieties of Quality Street are there in a tin?",
+      "options": ["8", "9", "11", "13"],
+      "correctAnswer": "11",
+      "image": "9.jpg"
+    },
+    {
+      "id": 10,
+      "question": "Which artist has had the most Christmas number one singles with different groups and collaborations?",
+      "options": ["Paul McCartney", "Ed Sheeran", "Elton John", "George Michael"],
+      "correctAnswer": "Paul McCartney",
+      "image": "10.jpg"
+    },
+    {
+      "id": 11,
+      "question": "The snow globe dates back to the 19th century. The first patent was given to Erwin Perzy, whose family still make snow globes to this day, but from which city?",
+      "options": ["Budapest", "Munich", "Warsaw", "Vienna"],
+      "correctAnswer": "Vienna",
+      "image": "11.jpg"
+    },
+    {
+      "id": 12,
+      "question": "Which department store was featured in the movie 'Miracle on 34th Street'?",
+      "options": ["Bloomingdales", "Macy's", "Gimbels", "Saks 5th Avenue"],
+      "correctAnswer": "Macy's",
+      "image": "12.jpg"
+    },
+    {
+      "id": 13,
+      "question": "How many ghosts visit scrooge in 'A Christmas Carol'?",
+      "options": ["3", "4", "5", "6"],
+      "correctAnswer": "4",
+      "image": "13.jpg"
+    },
+    {
+      "id": 14,
+      "question": "In Spain when do people typically exchange gifts?",
+      "options": ["Christmas eve", "Christmas day", "New years day", "January 6th"],
+      "correctAnswer": "January 6th",
+      "image": "14.jpg"
+    },
+    {
+      "id": 15,
+      "question": "What is 'roasting on an open fire' in the famous song?",
+      "options": ["Marshmallows", "Sausages", "Potatoes", "Chestnuts"],
+      "correctAnswer": "Chestnuts",
+      "image": "15.jpg"
+    },
+    {
+      "id": 16,
+      "question": "In which country do 13 'Yule lads' leave gifts for children in the 13 days before Christmas?",
+      "options": ["Sweden", "Norway", "Iceland", "Finland"],
+      "correctAnswer": "Iceland",
+      "image": "16.jpg"
+    },
+    {
+      "id": 17,
+      "question": "What is the name of the central European folklore figure who punishes misbehaving children during Christmas.",
+      "options": ["Krampus", "Jack Frost", "Balthazar", "Grinch"],
+      "correctAnswer": "Krampus",
+      "image": "17.jpg"
+    },
+    {
+      "id": 18,
+      "question": "In which pantomime do Wishy Washy and Widow Twanky appear?",
+      "options": ["Dick Whittington", "Jack and the beanstalk", "Aladdin", "Beauty and the Beast"],
+      "correctAnswer": "Aladdin",
+      "image": "18.jpg"
+    },
+    {
+      "id": 20,
+      "question": "Which Canadian superstar had a hit with 'Mistletoe' in 2011?",
+      "options": ["Michael Buble", "Avril Lavigne", "Shania Twain", "Justin Beiber"],
+      "correctAnswer": "Justin Beiber",
+      "image": "20.jpg"
+    },
+    {
+      "id": 21,
+      "question": "How many swans a swimming are there in the 'Twelve days of Christmas'?",
+      "options": ["6", "7", "8", "9"],
+      "correctAnswer": "7",
+      "image": "21.jpg"
+    },
+    {
+      "id": 23,
+      "question": "How Christmas tree in Trafalgar square is decorated with how many lights?",
+      "options": ["500", "700", "800", "5000"],
+      "correctAnswer": "500",
+      "image": "23.jpg"
+    },
+    {
+      "id": 24,
+      "question": "When was the first commercially produced Christmas card sent?",
+      "options": ["1810", "1843", "1893", "1909"],
+      "correctAnswer": "1843",
+      "image": "24.jpg"
+    },
+    {
+      "id": 26,
+      "question": "How many households will Santa Visit this year? (Allegedly)",
+      "options": ["250 million", "310 million", "380 million", "420 million"],
+      "correctAnswer": "380 million",
+      "image": "26.jpg"
+    },
+    {
+      "id": 27,
+      "question": "In the nativity story where did Mary & Joseph come from?",
+      "options": ["Bethlehem", "Jerusalem", "Damascus", "Nazareth"],
+      "correctAnswer": "Nazareth",
+      "image": "27.jpg"
+    },
+    {
+      "id": 29,
+      "question": "Which country did egg nog come from?",
+      "options": ["England", "Ireland", "France", "Sweden"],
+      "correctAnswer": "England",
+      "image": "29.jpg"
+    },
+    {
+      "id": 30,
+      "question": "In the 1996 Christmas special of Only Fools and Horses what did Del and Rodney dress up as?",
+      "options": ["Starsky and Hutch", "Superman & Lois Lane", "Sherlock Holmes and Dr Watson", "Batman and Robin"],
+      "correctAnswer": "Batman and Robin",
+      "image": "30.jpg"
+    },
+    {
+      "id": 25,
+      "question": "What gas do Brussel Sprouts produce?",
+      "options": ["Hydrogen", "Methane", "Carbon Dioxide", "All three"],
+      "correctAnswer": "All three",
+      "image": "25.jpg"
+    }
+  ]
+}
