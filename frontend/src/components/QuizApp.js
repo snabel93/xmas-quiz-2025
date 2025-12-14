@@ -127,13 +127,17 @@ const QuizApp = () => {
 
   const handleNext = async () => {
     if (currentQuestion < quizData.questions.length - 1) {
-      // Reset everything for next question
+      // Reset everything for next question in correct order
       setSelectedAnswer('');
       setIsAnswered(false);
       setSparkles([]);
-      setCurrentQuestion(currentQuestion + 1);
-      setTimeLeft(20);
       setTimerProgress(100);
+
+      // Use setTimeout to ensure progress is set before changing question
+      setTimeout(() => {
+        setCurrentQuestion(currentQuestion + 1);
+        setTimeLeft(20);
+      }, 0);
     } else {
       // Always transition to completed screen first
       setScreen('completed');
@@ -253,13 +257,12 @@ const QuizApp = () => {
 
             <div className="mb-6 w-full">
               <div className="flex items-center mb-2">
-                <Timer className="w-6 h-6 mr-1" style={{ color: '#3da7ff' }} />
-                <span className="text-xl font-medium mr-4" style={{ color: '#3da7ff' }}>{timeLeft}</span>
+                <Timer className="text-green-500 w-6 h-6 mr-1" />
+                <span className="text-green-500 text-xl font-medium mr-4">{timeLeft}</span>
                 <div className="flex-1 relative h-2 bg-gray-700 rounded">
                   <div
-                    className="absolute inset-y-0 left-0 rounded"
+                    className="absolute inset-y-0 left-0 bg-green-500 rounded"
                     style={{
-                      backgroundColor: '#3da7ff',
                       width: `${timerProgress}%`,
                       transition: selectedAnswer ? 'none' : 'width 1s linear'
                     }}
