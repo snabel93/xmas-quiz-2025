@@ -22,6 +22,7 @@ const QuizApp = () => {
   const [error, setError] = useState(null);
   const timerStartRef = useRef(null);
   const [sparkles, setSparkles] = useState([]);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const fetchLeaderboard = useCallback(async () => {
     try {
@@ -127,17 +128,19 @@ const QuizApp = () => {
 
   const handleNext = async () => {
     if (currentQuestion < quizData.questions.length - 1) {
-      // Reset everything for next question in correct order
+      // Disable transitions and reset states
+      setIsTransitioning(true);
       setSelectedAnswer('');
       setIsAnswered(false);
       setSparkles([]);
+      setTimeLeft(20);
       setTimerProgress(100);
 
-      // Use setTimeout to ensure progress is set before changing question
+      // Re-enable transitions and move to next question
       setTimeout(() => {
+        setIsTransitioning(false);
         setCurrentQuestion(currentQuestion + 1);
-        setTimeLeft(20);
-      }, 0);
+      }, 50);
     } else {
       // Always transition to completed screen first
       setScreen('completed');
@@ -264,7 +267,7 @@ const QuizApp = () => {
                     className="absolute inset-y-0 left-0 bg-green-500 rounded"
                     style={{
                       width: `${timerProgress}%`,
-                      transition: selectedAnswer ? 'none' : 'width 1s linear'
+                      transition: (selectedAnswer || isTransitioning) ? 'none' : 'width 1s linear'
                     }}
                   />
                 </div>

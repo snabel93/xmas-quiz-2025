@@ -1,0 +1,18 @@
+Recommended Image Specifications:
+Dimensions:
+Width: 800-1200px wide
+Aspect Ratio: 16:9 or 4:3 (landscape) works best
+Example sizes:
+800 × 450px (16:9)
+1000 × 563px (16:9)
+800 × 600px (4:3)
+File Format & Size:
+Format: JPEG (.jpg) for photos, PNG (.png) for graphics/text
+WebP (.webp) is best for modern browsers (smaller file size)
+File size: Aim for 50-200KB per image (after compression)
+Maximum: 500KB to keep load times fast on mobile
+Why these sizes?
+The quiz container is max-w-2xl (672px max width) in your layout
+Images display at 100% width of the container
+On mobile, they'll scale down automatically
+800-1200px provides good quality for retina/high-DPI screens without being too large
