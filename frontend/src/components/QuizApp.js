@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Timer, Circle, CircleDot } from 'lucide-react';
 import quizData from '../quiz.json';
 import Snow from './Snow';
 
 const API_URL = process.env.NODE_ENV === 'production'
     //? 'https://quiz-app-backend-sable.vercel.app/api'
-    ? 'xmas-quiz-2025-edhpc1vxz-snabel93s-projects.vercel.app'
+    ? 'xmas-quiz-2025.vercel.app'
     : 'http://localhost:3000/api';
 
 const QuizApp = () => {
@@ -20,6 +20,7 @@ const QuizApp = () => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [leaderboard, setLeaderboard] = useState([]);
   const [error, setError] = useState(null);
+  const timerStartRef = useRef(null);
 
   const fetchLeaderboard = useCallback(async () => {
     try {
@@ -54,33 +55,41 @@ const QuizApp = () => {
     setIsAnswered(true);
   }, [currentQuestion, selectedAnswer]);
 
-  // Timer effect
+  // Initialize timer start time when question starts
   useEffect(() => {
-    if (screen === 'question' && timeLeft > 0 && !isAnswered) {
-      const countdownTimer = setInterval(() => {
+    if (screen === 'question' && !isAnswered) {
+      timerStartRef.current = Date.now();
+    }
+  }, [currentQuestion, screen, isAnswered]);
+
+  // Countdown timer effect
+  useEffect(() => {
+    if (screen === 'question' && timeLeft > 0 && !isAnswered && !selectedAnswer) {
+      const timer = setInterval(() => {
         setTimeLeft((prev) => prev - 1);
       }, 1000);
 
-      const startTime = Date.now();
-      const duration = timeLeft * 1000;
-
-      const progressTimer = setInterval(() => {
-        const elapsed = Date.now() - startTime;
-        const remaining = Math.max(0, duration - elapsed);
-        const progress = (remaining / (20 * 1000)) * 100;
-        setTimerProgress(progress);
-      }, 16);
-
-      return () => {
-        clearInterval(countdownTimer);
-        clearInterval(progressTimer);
-      };
+      return () => clearInterval(timer);
     }
 
     if (timeLeft === 0 && !isAnswered) {
       handleAnswer();
     }
-  }, [timeLeft, screen, isAnswered, handleAnswer]);
+  }, [timeLeft, screen, isAnswered, selectedAnswer, handleAnswer]);
+
+  // Smooth progress bar animation
+  useEffect(() => {
+    if (screen === 'question' && !isAnswered && !selectedAnswer && timerStartRef.current) {
+      const progressTimer = setInterval(() => {
+        const elapsed = Date.now() - timerStartRef.current;
+        const remaining = Math.max(0, 20000 - elapsed);
+        const progress = (remaining / 20000) * 100;
+        setTimerProgress(progress);
+      }, 16);
+
+      return () => clearInterval(progressTimer);
+    }
+  }, [screen, isAnswered, selectedAnswer]);
 
   const handleStart = () => {
     if (userName.trim()) {
