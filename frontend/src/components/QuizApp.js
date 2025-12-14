@@ -5,7 +5,7 @@ import Snow from './Snow';
 
 const API_URL = process.env.NODE_ENV === 'production'
     //? 'https://quiz-app-backend-sable.vercel.app/api'
-    ? 'xmas-quiz-2025.vercel.app'
+    ? 'xmas-quiz-2025.vercel.app/api'
     : 'http://localhost:3000/api';
 
 const QuizApp = () => {
@@ -80,14 +80,26 @@ const QuizApp = () => {
   // Smooth progress bar animation
   useEffect(() => {
     if (screen === 'question' && !isAnswered && !selectedAnswer && timerStartRef.current) {
-      const progressTimer = setInterval(() => {
+      let animationFrameId;
+
+      const updateProgress = () => {
         const elapsed = Date.now() - timerStartRef.current;
         const remaining = Math.max(0, 20000 - elapsed);
         const progress = (remaining / 20000) * 100;
         setTimerProgress(progress);
-      }, 16);
 
-      return () => clearInterval(progressTimer);
+        if (remaining > 0) {
+          animationFrameId = requestAnimationFrame(updateProgress);
+        }
+      };
+
+      animationFrameId = requestAnimationFrame(updateProgress);
+
+      return () => {
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+      };
     }
   }, [screen, isAnswered, selectedAnswer]);
 
