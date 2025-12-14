@@ -127,12 +127,17 @@ const QuizApp = () => {
 
   const handleNext = async () => {
     if (currentQuestion < quizData.questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+      // Reset state for next question
       setSelectedAnswer('');
       setIsAnswered(false);
-      setTimerProgress(100);
-      setTimeLeft(20);
       setSparkles([]);
+      setTimerProgress(100);
+
+      // Small delay to ensure progress bar is reset before changing question
+      setTimeout(() => {
+        setCurrentQuestion(currentQuestion + 1);
+        setTimeLeft(20);
+      }, 10);
     } else {
       // Always transition to completed screen first
       setScreen('completed');
