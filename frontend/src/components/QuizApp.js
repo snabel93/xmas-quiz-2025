@@ -21,6 +21,7 @@ const QuizApp = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [error, setError] = useState(null);
   const timerStartRef = useRef(null);
+  const [sparkles, setSparkles] = useState([]);
 
   const fetchLeaderboard = useCallback(async () => {
     try {
@@ -43,6 +44,36 @@ const QuizApp = () => {
   useEffect(() => {
     fetchLeaderboard();
   }, [fetchLeaderboard]);
+
+  const createSparkles = useCallback((event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const newSparkles = [];
+    for (let i = 0; i < 8; i++) {
+      const angle = (i / 8) * Math.PI * 2;
+      const distance = 40 + Math.random() * 20;
+      newSparkles.push({
+        id: Date.now() + i,
+        left: centerX,
+        top: centerY,
+        tx: Math.cos(angle) * distance,
+        ty: Math.sin(angle) * distance
+      });
+    }
+    setSparkles(newSparkles);
+
+    // Clear sparkles after animation
+    setTimeout(() => setSparkles([]), 600);
+  }, []);
+
+  const handleAnswerClick = useCallback((option, event) => {
+    if (!isAnswered && !selectedAnswer) {
+      setSelectedAnswer(option);
+      createSparkles(event);
+    }
+  }, [isAnswered, selectedAnswer, createSparkles]);
 
   const handleAnswer = useCallback(() => {
     const currentQ = quizData.questions[currentQuestion];
@@ -101,6 +132,7 @@ const QuizApp = () => {
       setIsAnswered(false);
       setTimerProgress(100);
       setTimeLeft(20);
+      setSparkles([]);
     } else {
       // Always transition to completed screen first
       setScreen('completed');
@@ -238,10 +270,10 @@ const QuizApp = () => {
               {currentQ.options.map((option, index) => (
                 <button
                   key={index}
-                  onClick={() => !isAnswered && !selectedAnswer && setSelectedAnswer(option)}
-                  className={`w-full p-4 rounded text-left text-lg ${
+                  onClick={(e) => handleAnswerClick(option, e)}
+                  className={`sparkle-container w-full p-4 rounded text-left text-lg ${
                     selectedAnswer === option
-                      ? 'bg-green-800 text-white'
+                      ? 'bg-green-800 text-white shake'
                       : selectedAnswer
                       ? 'bg-gray-700 text-white opacity-50 cursor-not-allowed'
                       : 'bg-gray-700 hover:bg-gray-600 text-white cursor-pointer'
@@ -258,6 +290,18 @@ const QuizApp = () => {
                     </div>
                     <span className="text-right">{option}</span>
                   </div>
+                  {selectedAnswer === option && sparkles.map(sparkle => (
+                    <div
+                      key={sparkle.id}
+                      className="sparkle"
+                      style={{
+                        left: `${sparkle.left}px`,
+                        top: `${sparkle.top}px`,
+                        '--tx': `${sparkle.tx}px`,
+                        '--ty': `${sparkle.ty}px`
+                      }}
+                    />
+                  ))}
                 </button>
               ))}
             </div>
