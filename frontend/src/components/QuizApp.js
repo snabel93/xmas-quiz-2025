@@ -77,31 +77,14 @@ const QuizApp = () => {
     }
   }, [timeLeft, screen, isAnswered, selectedAnswer, handleAnswer]);
 
-  // Smooth progress bar animation
+  // Smooth progress bar animation - sync with timeLeft changes
   useEffect(() => {
-    if (screen === 'question' && !isAnswered && !selectedAnswer && timerStartRef.current) {
-      let animationFrameId;
-
-      const updateProgress = () => {
-        const elapsed = Date.now() - timerStartRef.current;
-        const remaining = Math.max(0, 20000 - elapsed);
-        const progress = (remaining / 20000) * 100;
-        setTimerProgress(progress);
-
-        if (remaining > 0) {
-          animationFrameId = requestAnimationFrame(updateProgress);
-        }
-      };
-
-      animationFrameId = requestAnimationFrame(updateProgress);
-
-      return () => {
-        if (animationFrameId) {
-          cancelAnimationFrame(animationFrameId);
-        }
-      };
+    if (screen === 'question' && !isAnswered && !selectedAnswer) {
+      // Set initial progress based on timeLeft
+      const progress = (timeLeft / 20) * 100;
+      setTimerProgress(progress);
     }
-  }, [screen, isAnswered, selectedAnswer]);
+  }, [timeLeft, screen, isAnswered, selectedAnswer]);
 
   const handleStart = () => {
     if (userName.trim()) {
@@ -240,8 +223,11 @@ const QuizApp = () => {
                 <span className="text-green-500 text-xl font-medium mr-4">{timeLeft}</span>
                 <div className="flex-1 relative h-2 bg-gray-700 rounded">
                   <div
-                    className="absolute inset-y-0 left-0 bg-green-500 rounded transition-all ease-linear duration-100"
-                    style={{ width: `${timerProgress}%` }}
+                    className="absolute inset-y-0 left-0 bg-green-500 rounded"
+                    style={{
+                      width: `${timerProgress}%`,
+                      transition: selectedAnswer ? 'none' : 'width 1s linear'
+                    }}
                   />
                 </div>
               </div>
