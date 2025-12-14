@@ -104,11 +104,16 @@ const QuizApp = () => {
     }
   }, [currentQuestion, screen, isAnswered]);
 
-  // Countdown timer effect
+  // Countdown timer effect - update both timer and progress together
   useEffect(() => {
     if (screen === 'question' && timeLeft > 0 && !isAnswered && !selectedAnswer) {
       const timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
+        setTimeLeft((prev) => {
+          const newTime = prev - 1;
+          // Update progress bar at the same time
+          setTimerProgress((newTime / 20) * 100);
+          return newTime;
+        });
       }, 1000);
 
       return () => clearInterval(timer);
@@ -118,15 +123,6 @@ const QuizApp = () => {
       handleAnswer();
     }
   }, [timeLeft, screen, isAnswered, selectedAnswer, handleAnswer]);
-
-  // Smooth progress bar animation - sync with timeLeft changes
-  useEffect(() => {
-    if (screen === 'question' && !isAnswered && !selectedAnswer) {
-      // Set initial progress based on timeLeft
-      const progress = (timeLeft / 20) * 100;
-      setTimerProgress(progress);
-    }
-  }, [timeLeft, screen, isAnswered, selectedAnswer]);
 
   const handleStart = () => {
     if (userName.trim()) {
@@ -291,7 +287,7 @@ const QuizApp = () => {
                   onClick={(e) => handleAnswerClick(option, e)}
                   className={`sparkle-container w-full p-4 rounded text-left text-lg ${
                     selectedAnswer === option
-                      ? 'bg-green-800 text-white shake'
+                      ? 'bg-green-800 text-white single-pulse'
                       : selectedAnswer
                       ? 'bg-gray-700 text-white opacity-50 cursor-not-allowed'
                       : 'bg-gray-700 hover:bg-gray-600 text-white cursor-pointer'

@@ -22,8 +22,20 @@
   }
 }
 
-.shake {
-  animation: shake 0.6s ease-in-out;
+@keyframes singlePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.single-pulse {
+  animation: singlePulse 0.4s ease-out;
 }
 
 .sparkle-container {
