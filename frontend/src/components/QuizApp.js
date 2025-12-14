@@ -238,13 +238,15 @@ const QuizApp = () => {
               {currentQ.options.map((option, index) => (
                 <button
                   key={index}
-                  onClick={() => !isAnswered && setSelectedAnswer(option)}
+                  onClick={() => !isAnswered && !selectedAnswer && setSelectedAnswer(option)}
                   className={`w-full p-4 rounded text-left text-lg ${
                     selectedAnswer === option
                       ? 'bg-green-800 text-white'
-                      : 'bg-gray-700 hover:bg-gray-600 text-white'
+                      : selectedAnswer
+                      ? 'bg-gray-700 text-white opacity-50 cursor-not-allowed'
+                      : 'bg-gray-700 hover:bg-gray-600 text-white cursor-pointer'
                   }`}
-                  disabled={isAnswered}
+                  disabled={isAnswered || selectedAnswer !== ''}
                 >
                   <div className="flex items-center justify-between w-full">
                     <div className="flex items-center">
