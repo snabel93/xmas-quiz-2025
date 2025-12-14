@@ -73,8 +73,18 @@ const QuizApp = () => {
     if (!isAnswered && !selectedAnswer) {
       setSelectedAnswer(option);
       createSparkles(event);
+
+      // Auto-submit after selecting answer
+      const currentQ = quizData.questions[currentQuestion];
+      const isCorrect = option === currentQ.correctAnswer;
+
+      if (isCorrect) {
+        setScore(prev => prev + 1);
+      }
+
+      setIsAnswered(true);
     }
-  }, [isAnswered, selectedAnswer, createSparkles]);
+  }, [isAnswered, selectedAnswer, createSparkles, currentQuestion]);
 
   const handleAnswer = useCallback(() => {
     const currentQ = quizData.questions[currentQuestion];
@@ -314,25 +324,11 @@ const QuizApp = () => {
               ))}
             </div>
 
-            {!isAnswered ? (
-              <div className="flex justify-center">
-                <button
-                  onClick={handleAnswer}
-                  disabled={!selectedAnswer}
-                  className={`px-8 py-2 rounded-full text-xl font-semibold transition-colors
-                    ${!selectedAnswer
-                      ? 'bg-green-500/50 text-white cursor-not-allowed'
-                      : 'bg-green-500 hover:bg-green-600 text-white cursor-pointer'
-                    }`}
-                >
-                  Submit
-                </button>
-              </div>
-            ) : (
+            {isAnswered && (
               <div className="flex justify-center">
                 <button
                   onClick={handleNext}
-                  className="px-8 py-2 rounded-full text-xl font-semibold bg-green-500 hover:bg-green-600 text-white cursor-pointer transition-colors"
+                  className="px-8 py-2 rounded-full text-xl font-semibold bg-green-500 hover:bg-green-600 text-white cursor-pointer transition-colors pulse"
                 >
                   {currentQuestion < quizData.questions.length - 1 ? 'Next Question' : 'See Your Score'}
                 </button>
