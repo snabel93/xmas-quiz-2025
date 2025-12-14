@@ -11,7 +11,7 @@ app.use(cors({
         'http://localhost:3000',
         'http://localhost:3001',
         'http://localhost:3002',
-        'xmas-quiz-2025-frontend.vercel.app',
+        'https://xmas-quiz-2025-frontend.vercel.app',
         'https://quiz.10squared.co.uk',
       //  'https://quiz-backend-snabel93.vercel.app',
       //  'https://quiz-app-backend-fnfnvq1ae-snabel93s-projects.vercel.app',

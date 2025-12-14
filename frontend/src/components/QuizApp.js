@@ -5,7 +5,7 @@ import Snow from './Snow';
 
 const API_URL = process.env.NODE_ENV === 'production'
     //? 'https://quiz-app-backend-sable.vercel.app/api'
-    ? 'xmas-quiz-2025.vercel.app/api'
+    ? 'https://xmas-quiz-2025.vercel.app/api'
     : 'http://localhost:3000/api';
 
 const QuizApp = () => {
@@ -89,6 +89,7 @@ const QuizApp = () => {
   const handleStart = () => {
     if (userName.trim()) {
       setScreen('question');
+      setTimerProgress(100);
       setTimeLeft(20);
     }
   };
@@ -98,8 +99,8 @@ const QuizApp = () => {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer('');
       setIsAnswered(false);
-      setTimeLeft(20);
       setTimerProgress(100);
+      setTimeLeft(20);
     } else {
       // Always transition to completed screen first
       setScreen('completed');
@@ -219,11 +220,11 @@ const QuizApp = () => {
 
             <div className="mb-6 w-full">
               <div className="flex items-center mb-2">
-                <Timer className="text-green-500 w-6 h-6 mr-1" />
-                <span className="text-green-500 text-xl font-medium mr-4">{timeLeft}</span>
+                <Timer className="text-red-500 w-6 h-6 mr-1" />
+                <span className="text-red-500 text-xl font-medium mr-4">{timeLeft}</span>
                 <div className="flex-1 relative h-2 bg-gray-700 rounded">
                   <div
-                    className="absolute inset-y-0 left-0 bg-green-500 rounded"
+                    className="absolute inset-y-0 left-0 bg-red-500 rounded"
                     style={{
                       width: `${timerProgress}%`,
                       transition: selectedAnswer ? 'none' : 'width 1s linear'
