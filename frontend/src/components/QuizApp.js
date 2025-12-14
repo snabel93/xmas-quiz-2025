@@ -257,12 +257,13 @@ const QuizApp = () => {
 
             <div className="mb-6 w-full">
               <div className="flex items-center mb-2">
-                <Timer className="text-red-500 w-6 h-6 mr-1" />
-                <span className="text-red-500 text-xl font-medium mr-4">{timeLeft}</span>
+                <Timer className="w-6 h-6 mr-1" style={{ color: '#3da7ff' }} />
+                <span className="text-xl font-medium mr-4" style={{ color: '#3da7ff' }}>{timeLeft}</span>
                 <div className="flex-1 relative h-2 bg-gray-700 rounded">
                   <div
-                    className="absolute inset-y-0 left-0 bg-red-500 rounded"
+                    className="absolute inset-y-0 left-0 rounded"
                     style={{
+                      backgroundColor: '#3da7ff',
                       width: `${timerProgress}%`,
                       transition: selectedAnswer ? 'none' : 'width 1s linear'
                     }}
