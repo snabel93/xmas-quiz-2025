@@ -154,7 +154,7 @@ const QuizApp = () => {
   }, [timeLeft, screen, isAnswered, selectedAnswer, handleAnswer]);
 
   const handleStart = () => {
-    if (userName.trim()) {
+    if (userName.trim() && !nameExists) {
       setScreen('question');
       setTimerProgress(100);
       setTimeLeft(20);
@@ -252,7 +252,7 @@ const QuizApp = () => {
                 />
                 {nameExists && (
                   <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap">
-                    Name already exists
+                    Sorry, that name already exists
                     <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full">
                       <div className="border-8 border-transparent border-t-red-500"></div>
                     </div>
@@ -262,9 +262,9 @@ const QuizApp = () => {
               <div className="flex justify-center">
                 <button
                   onClick={handleStart}
-                  disabled={!userName.trim()}
+                  disabled={!userName.trim() || nameExists}
                   className={`px-8 py-2 rounded-full text-xl font-semibold transition-colors
-                    ${!userName.trim()
+                    ${!userName.trim() || nameExists
                       ? 'bg-green-500/50 text-white cursor-not-allowed'
                       : userName.trim().length >= 2
                       ? 'bg-green-500 hover:bg-green-600 text-white cursor-pointer pulse'
