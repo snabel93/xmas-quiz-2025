@@ -107,16 +107,11 @@ const QuizApp = () => {
   // Countdown timer effect - update both timer and progress together
   useEffect(() => {
     if (screen === 'question' && timeLeft > 0 && !isAnswered && !selectedAnswer) {
-      // Update progress immediately before decrementing
-      setTimerProgress(((timeLeft - 1) / 20) * 100);
-
       const timer = setInterval(() => {
         setTimeLeft((prev) => {
           const newTime = prev - 1;
-          // Update progress bar to next second
-          if (newTime > 0) {
-            setTimerProgress(((newTime - 1) / 20) * 100);
-          }
+          // Update progress bar - it will animate to this value over 1 second
+          setTimerProgress((newTime / 20) * 100);
           return newTime;
         });
       }, 1000);
