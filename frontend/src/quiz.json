@@ -2,17 +2,17 @@
   "questions": [
     {
       "id": 1,
-      "question": "What is the Italian Christmas Donkey called?",
-      "options": ["Jack", "Curtis", "Dominick", "Eeyore"],
+      "question": "What is the name of the famous Christmas Donkey?",
+      "options": ["Jack", "Donkey", "Dominick", "Curtis"],
       "correctAnswer": "Dominick",
-      "image": "1.jpg"
+      "image": "1.png"
     },
     {
       "id": 2,
       "question": "In Home Alone where were Kevin's family travelling on holiday to?",
       "options": ["London", "Paris", "Rome", "New York"],
       "correctAnswer": "Paris",
-      "image": "2.jpg"
+      "image": "2.png"
     },
     {
       "id": 3,
@@ -40,25 +40,25 @@
       "question": "Good King Wenceslas was a king of Bohemia in the 10th century. What country is Bohemia now known as?",
       "options": ["Croatia", "Bulgaria", "Hungary", "Czech Republic"],
       "correctAnswer": "Czech Republic",
-      "image": "6.jpg"
+      "image": "6.png"
     },
     {
       "id": 7,
       "question": "The dance of the sugar plum fairy is part of which ballet, often performed at Christmas time?",
       "options": ["Sleeping Beauty", "Copellia", "The Nutcracker", "Cinderella"],
       "correctAnswer": "The Nutcracker",
-      "image": "7.jpg"
+      "image": "7.png"
     },
     {
       "id": 8,
       "question": "How many varieties of Quality Street are there in a tin?",
       "options": ["8", "9", "11", "13"],
       "correctAnswer": "11",
-      "image": "8.jpg"
+      "image": "8.png"
     },
     {
       "id": 9,
-      "question": "Which artist has had the most Christmas number one singles with different groups and collaborations?",
+      "question": "Which singer has had the most Christmas number one singles with different groups and collaborations?",
       "options": ["Paul McCartney", "Ed Sheeran", "Elton John", "George Michael"],
       "correctAnswer": "Paul McCartney",
       "image": "9.jpg"
@@ -89,7 +89,7 @@
       "question": "In Spain when do people typically exchange gifts?",
       "options": ["Christmas eve", "Christmas day", "New years day", "January 6th"],
       "correctAnswer": "January 6th",
-      "image": "13.jpg"
+      "image": "13.webp"
     },
     {
       "id": 14,
@@ -103,14 +103,14 @@
       "question": "In which country do 13 'Yule lads' leave gifts for children in the 13 days before Christmas?",
       "options": ["Sweden", "Norway", "Iceland", "Finland"],
       "correctAnswer": "Iceland",
-      "image": "15.jpg"
+      "image": "15.webp"
     },
     {
       "id": 16,
       "question": "What is the name of the central European folklore figure who punishes misbehaving children during Christmas.",
       "options": ["Krampus", "Jack Frost", "Balthazar", "Grinch"],
       "correctAnswer": "Krampus",
-      "image": "16.jpg"
+      "image": "16.png"
     },
     {
       "id": 17,
@@ -131,49 +131,49 @@
       "question": "How many swans a swimming are there in the 'Twelve days of Christmas'?",
       "options": ["6", "7", "8", "9"],
       "correctAnswer": "7",
-      "image": "19.jpg"
+      "image": "19.png"
     },
     {
       "id": 20,
       "question": "How Christmas tree in Trafalgar square is decorated with how many lights?",
-      "options": ["500", "700", "800", "5000"],
+      "options": ["500", "700", "8000", "500000"],
       "correctAnswer": "500",
-      "image": "20.jpg"
+      "image": "20.webp"
     },
     {
       "id": 21,
       "question": "When was the first commercially produced Christmas card sent?",
       "options": ["1810", "1843", "1893", "1909"],
       "correctAnswer": "1843",
-      "image": "21.jpg"
+      "image": "21.webp"
     },
     {
       "id": 22,
       "question": "How many households will Santa Visit this year? (Allegedly)",
       "options": ["250 million", "310 million", "380 million", "420 million"],
       "correctAnswer": "380 million",
-      "image": "22.jpg"
+      "image": "22.webp"
     },
     {
       "id": 23,
       "question": "In the nativity story where did Mary & Joseph come from?",
       "options": ["Bethlehem", "Jerusalem", "Damascus", "Nazareth"],
       "correctAnswer": "Nazareth",
-      "image": "23.jpg"
+      "image": "23.avif"
     },
     {
       "id": 24,
       "question": "In the 1996 Christmas special of Only Fools and Horses what did Del and Rodney dress up as?",
       "options": ["Starsky and Hutch", "Superman & Lois Lane", "Sherlock Holmes and Dr Watson", "Batman and Robin"],
       "correctAnswer": "Batman and Robin",
-      "image": "24.jpg"
+      "image": "24.webp"
     },
     {
       "id": 25,
       "question": "What gas do Brussel Sprouts produce?",
       "options": ["Hydrogen", "Methane", "Carbon Dioxide", "All three"],
       "correctAnswer": "All three",
-      "image": "25.jpg"
+      "image": "25.webp"
     }
   ]
 }

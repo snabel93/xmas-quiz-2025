@@ -20,6 +20,8 @@ const Snow = () => {
     // Snowflake configuration
     const snowflakes = [];
     const numberOfSnowflakes = 100;
+    let speedMultiplier = 1; // Normal speed
+    let isShaking = false;
 
     class Snowflake {
       constructor() {
@@ -36,8 +38,8 @@ const Snow = () => {
       }
 
       update() {
-        this.y += this.speed;
-        this.x += this.wind;
+        this.y += this.speed * speedMultiplier;
+        this.x += this.wind * speedMultiplier;
 
         // Reset snowflake when it goes off screen
         if (this.y > canvas.height) {
@@ -90,6 +92,55 @@ const Snow = () => {
       snowflakes.push(new Snowflake());
     }
 
+    // Shake detection for mobile devices
+    let lastX = 0, lastY = 0, lastZ = 0;
+    let shakeTimeout = null;
+
+    const handleDeviceMotion = (event) => {
+      const acceleration = event.accelerationIncludingGravity;
+      if (!acceleration) return;
+
+      const { x, y, z } = acceleration;
+      const threshold = 15; // Shake sensitivity
+
+      // Calculate change in acceleration
+      const deltaX = Math.abs(x - lastX);
+      const deltaY = Math.abs(y - lastY);
+      const deltaZ = Math.abs(z - lastZ);
+
+      // Detect shake
+      if (deltaX > threshold || deltaY > threshold || deltaZ > threshold) {
+        if (!isShaking) {
+          isShaking = true;
+          speedMultiplier = 4; // Speed up snow significantly
+
+          // Gradually slow down over 3 seconds
+          const slowDown = () => {
+            if (speedMultiplier > 1) {
+              speedMultiplier -= 0.05;
+              shakeTimeout = setTimeout(slowDown, 50);
+            } else {
+              speedMultiplier = 1;
+              isShaking = false;
+            }
+          };
+
+          // Clear any existing slowdown
+          if (shakeTimeout) clearTimeout(shakeTimeout);
+
+          // Start slowing down after a brief moment
+          setTimeout(slowDown, 500);
+        }
+      }
+
+      lastX = x;
+      lastY = y;
+      lastZ = z;
+    };
+
+    // Add shake listener
+    window.addEventListener('devicemotion', handleDeviceMotion);
+
     // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -106,6 +157,8 @@ const Snow = () => {
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('devicemotion', handleDeviceMotion);
+      if (shakeTimeout) clearTimeout(shakeTimeout);
     };
   }, []);
 
