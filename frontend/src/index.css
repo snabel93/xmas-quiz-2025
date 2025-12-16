@@ -24,19 +24,16 @@
 
 @keyframes wobble {
   0%, 100% { transform: rotate(0deg); }
-  10% { transform: rotate(-5deg); }
-  20% { transform: rotate(5deg); }
-  30% { transform: rotate(-5deg); }
-  40% { transform: rotate(5deg); }
-  50% { transform: rotate(-5deg); }
-  60% { transform: rotate(5deg); }
-  70% { transform: rotate(-5deg); }
-  80% { transform: rotate(5deg); }
-  90% { transform: rotate(-5deg); }
+  14% { transform: rotate(-4deg); }
+  28% { transform: rotate(4deg); }
+  42% { transform: rotate(-4deg); }
+  56% { transform: rotate(4deg); }
+  70% { transform: rotate(-4deg); }
+  84% { transform: rotate(4deg); }
 }
 
 .wobble {
-  animation: wobble 1s ease-in-out;
+  animation: wobble 0.7s ease-in-out;
 }
 
 .sparkle-container {

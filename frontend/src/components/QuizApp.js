@@ -23,6 +23,8 @@ const QuizApp = () => {
   const timerStartRef = useRef(null);
   const [sparkles, setSparkles] = useState([]);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [existingNames, setExistingNames] = useState([]);
+  const [nameExists, setNameExists] = useState(false);
 
   const fetchLeaderboard = useCallback(async () => {
     try {
@@ -34,6 +36,11 @@ const QuizApp = () => {
       const sorted = [...data].sort((a, b) => b.score - a.score);
       setLeaderboard(data);
       setSortedLeaderboard(sorted);
+
+      // Extract existing names for validation
+      const names = data.map(entry => entry.name.toLowerCase().trim());
+      setExistingNames(names);
+
       setError(null);
     } catch (err) {
       console.error('Error fetching leaderboard:', err);
@@ -45,6 +52,16 @@ const QuizApp = () => {
   useEffect(() => {
     fetchLeaderboard();
   }, [fetchLeaderboard]);
+
+  // Check if name exists when user types
+  useEffect(() => {
+    if (userName.trim().length >= 2) {
+      const nameLower = userName.toLowerCase().trim();
+      setNameExists(existingNames.includes(nameLower));
+    } else {
+      setNameExists(false);
+    }
+  }, [userName, existingNames]);
 
   const createSparkles = useCallback((event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -225,13 +242,23 @@ const QuizApp = () => {
               </ul>
             </div>
             <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="Enter your name"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-                className="w-full p-2 rounded bg-gray-700 text-white border-gray-600"
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Enter your name"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  className="w-full p-2 rounded bg-gray-700 text-white border-gray-600"
+                />
+                {nameExists && (
+                  <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap">
+                    Name already exists
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full">
+                      <div className="border-8 border-transparent border-t-red-500"></div>
+                    </div>
+                  </div>
+                )}
+              </div>
               <div className="flex justify-center">
                 <button
                   onClick={handleStart}
@@ -239,6 +266,8 @@ const QuizApp = () => {
                   className={`px-8 py-2 rounded-full text-xl font-semibold transition-colors
                     ${!userName.trim()
                       ? 'bg-green-500/50 text-white cursor-not-allowed'
+                      : userName.trim().length >= 2
+                      ? 'bg-green-500 hover:bg-green-600 text-white cursor-pointer pulse'
                       : 'bg-green-500 hover:bg-green-600 text-white cursor-pointer'
                     }`}
                 >
