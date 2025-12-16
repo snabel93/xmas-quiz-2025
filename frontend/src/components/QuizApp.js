@@ -48,17 +48,27 @@ const QuizApp = () => {
 
   const createSparkles = useCallback((event) => {
     const rect = event.currentTarget.getBoundingClientRect();
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+
+    // Get touch/click position relative to the button
+    let clickX, clickY;
+    if (event.touches && event.touches.length > 0) {
+      // Touch event
+      clickX = event.touches[0].clientX - rect.left;
+      clickY = event.touches[0].clientY - rect.top;
+    } else {
+      // Mouse event
+      clickX = event.clientX - rect.left;
+      clickY = event.clientY - rect.top;
+    }
 
     const newSparkles = [];
-    for (let i = 0; i < 8; i++) {
-      const angle = (i / 8) * Math.PI * 2;
-      const distance = 40 + Math.random() * 20;
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2;
+      const distance = 50 + Math.random() * 30;
       newSparkles.push({
         id: Date.now() + i,
-        left: centerX,
-        top: centerY,
+        left: clickX,
+        top: clickY,
         tx: Math.cos(angle) * distance,
         ty: Math.sin(angle) * distance
       });
@@ -288,7 +298,7 @@ const QuizApp = () => {
                   onClick={(e) => handleAnswerClick(option, e)}
                   className={`sparkle-container w-full p-4 rounded text-left text-lg ${
                     selectedAnswer === option
-                      ? 'bg-green-800 text-white single-pulse'
+                      ? 'bg-green-800 text-white wobble'
                       : selectedAnswer
                       ? 'bg-gray-700 text-white opacity-50 cursor-not-allowed'
                       : 'bg-gray-700 hover:bg-gray-600 text-white cursor-pointer'
