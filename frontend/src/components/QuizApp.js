@@ -136,13 +136,13 @@ const QuizApp = () => {
     if (screen === 'question' && timeLeft > 0 && !isAnswered && !selectedAnswer) {
       // Start the countdown
       const timer = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
+        setTimeLeft((prev) => {
+          const newTime = prev - 1;
+          // Update progress bar when time decreases
+          setTimerProgress((newTime / 20) * 100);
+          return newTime;
+        });
       }, 1000);
-
-      // Update progress bar to match current timeLeft
-      // The bar animates from current position to target over 1 second
-      const targetProgress = ((timeLeft - 1) / 20) * 100;
-      setTimerProgress(targetProgress);
 
       return () => clearInterval(timer);
     }
