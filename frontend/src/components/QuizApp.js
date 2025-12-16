@@ -117,14 +117,15 @@ const QuizApp = () => {
   // Countdown timer effect - update both timer and progress together
   useEffect(() => {
     if (screen === 'question' && timeLeft > 0 && !isAnswered && !selectedAnswer) {
+      // Start the countdown
       const timer = setInterval(() => {
-        setTimeLeft((prev) => {
-          const newTime = prev - 1;
-          // Update progress bar - it will animate to this value over 1 second
-          setTimerProgress((newTime / 20) * 100);
-          return newTime;
-        });
+        setTimeLeft((prev) => prev - 1);
       }, 1000);
+
+      // Update progress bar to match current timeLeft
+      // The bar animates from current position to target over 1 second
+      const targetProgress = ((timeLeft - 1) / 20) * 100;
+      setTimerProgress(targetProgress);
 
       return () => clearInterval(timer);
     }
@@ -278,7 +279,7 @@ const QuizApp = () => {
             <div className="mb-6 w-full">
               <div className="flex items-center mb-2">
                 <Timer className="text-green-500 w-6 h-6 mr-1" />
-                <span className="text-green-500 text-xl font-medium mr-4">{timeLeft}</span>
+                <span className="text-green-500 text-xl font-medium mr-4" style={{ minWidth: '1.5rem', display: 'inline-block' }}>{timeLeft}</span>
                 <div className="flex-1 relative h-2 bg-gray-700 rounded">
                   <div
                     className="absolute inset-y-0 left-0 bg-green-500 rounded"
