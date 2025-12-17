@@ -63,6 +63,18 @@ const QuizApp = () => {
     }
   }, [userName, existingNames]);
 
+  // Preload all question images
+  useEffect(() => {
+    const imagesToPreload = quizData.questions
+      .filter(q => q.image)
+      .map(q => `/images/${q.image}`);
+
+    imagesToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   const createSparkles = useCallback((event) => {
     const rect = event.currentTarget.getBoundingClientRect();
 
@@ -290,9 +302,8 @@ const QuizApp = () => {
       <div className="min-h-screen bg-gray-900 text-white p-4">
         <div className="max-w-2xl mx-auto bg-gray-800 rounded-lg">
           <div className="p-6">
-            <div className="flex justify-between mb-4">
-              <h2 className="text-2xl font-bold text-white">Christmas Quiz</h2>
-              <span className="text-xl text-white">Question {currentQuestion + 1}</span>
+            <div className="mb-4">
+              <h2 className="text-2xl font-bold text-white">Question No. {currentQuestion + 1}</h2>
             </div>
 
             <h3 className="text-xl font-bold text-white mb-8">{currentQ.question}</h3>
