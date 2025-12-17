@@ -136,6 +136,12 @@ const QuizApp = () => {
 
   // Timer effect - single source of truth
   useEffect(() => {
+    // Clear any existing interval first
+    if (timerIntervalRef.current) {
+      clearInterval(timerIntervalRef.current);
+      timerIntervalRef.current = null;
+    }
+
     // Only run timer if on question screen, not answered, and no answer selected
     if (screen === 'question' && !isAnswered && !selectedAnswer) {
       // Start the countdown interval
@@ -150,15 +156,16 @@ const QuizApp = () => {
           return prev - 1;
         });
       }, 1000);
-
-      // Cleanup interval on unmount or when dependencies change
-      return () => {
-        if (timerIntervalRef.current) {
-          clearInterval(timerIntervalRef.current);
-        }
-      };
     }
-  }, [screen, isAnswered, selectedAnswer, handleAnswer]);
+
+    // Cleanup interval on unmount or when dependencies change
+    return () => {
+      if (timerIntervalRef.current) {
+        clearInterval(timerIntervalRef.current);
+        timerIntervalRef.current = null;
+      }
+    };
+  }, [screen, isAnswered, selectedAnswer, currentQuestion, handleAnswer]);
 
   const handleStart = () => {
     if (userName.trim() && !nameExists) {
