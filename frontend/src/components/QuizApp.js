@@ -68,8 +68,9 @@ const QuizApp = () => {
     }
   }, [userName, existingNames]);
 
-  // Preload all question images
+  // Preload all question images and video
   useEffect(() => {
+    // Preload images
     const imagesToPreload = activeQuizData.questions
       .filter(q => q.image)
       .map(q => `/images/${q.image}`);
@@ -78,6 +79,11 @@ const QuizApp = () => {
       const img = new Image();
       img.src = src;
     });
+
+    // Preload video
+    const video = document.createElement('video');
+    video.src = '/images/thanksforplaying.webm';
+    video.preload = 'auto';
   }, [activeQuizData]);
 
   const createSparkles = useCallback((event) => {
@@ -254,7 +260,7 @@ const QuizApp = () => {
               </h3>
             </div>
             <img
-              src="/images/welcome.jpg"
+              src="/images/welcome.webp"
               alt="Welcome"
               className="w-full rounded-lg mb-6"
             />
@@ -318,24 +324,21 @@ const QuizApp = () => {
   // Video Screen
   if (screen === 'video') {
     return (
-      <>
-        <Snow />
-        <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
-          <div className="max-w-2xl w-full">
-            <video
-              ref={videoRef}
-              autoPlay
-              playsInline
-              onEnded={() => setScreen('completed')}
-              className="w-full rounded-lg"
-              style={{ maxHeight: '80vh', objectFit: 'contain' }}
-            >
-              <source src="/images/thanksforplaying.webm" type="video/webm" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
+      <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full">
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            onEnded={() => setScreen('completed')}
+            className="w-full rounded-lg"
+            style={{ maxHeight: '80vh', objectFit: 'contain' }}
+          >
+            <source src="/images/thanksforplaying.webm" type="video/webm" />
+            Your browser does not support the video tag.
+          </video>
         </div>
-      </>
+      </div>
     );
   }
 

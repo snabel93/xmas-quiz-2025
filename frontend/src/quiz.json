@@ -5,84 +5,84 @@
       "question": "What is the name of the famous Christmas Donkey?",
       "options": ["Jack", "Donkey", "Dominick", "Curtis"],
       "correctAnswer": "Dominick",
-      "image": "1.png"
+      "image": "1.webp"
     },
     {
       "id": 2,
       "question": "In Home Alone where were Kevin's family travelling on holiday to?",
       "options": ["London", "Paris", "Rome", "New York"],
       "correctAnswer": "Paris",
-      "image": "2.png"
+      "image": "2.webp"
     },
     {
       "id": 3,
       "question": "What kind of Christmas does Elvis sing about in his 1957 hit?",
       "options": ["White", "Merry", "Rocking", "Blue"],
       "correctAnswer": "White",
-      "image": "3.jpg"
+      "image": "3.webp"
     },
     {
       "id": 4,
       "question": "What is Bouche de Noel?",
       "options": ["French Christmas log cake", "Belgian Candle", "Swiss Christmas Ornament", "Canadian Christmas drink"],
       "correctAnswer": "French Christmas log cake",
-      "image": "4.jpg"
+      "image": "4.webp"
     },
     {
       "id": 5,
       "question": "Which city boasts the oldest Christmas market in Europe?",
       "options": ["Munich", "Dresden", "Vienna", "Dusseldorf"],
       "correctAnswer": "Dresden",
-      "image": "5.jpg"
+      "image": "5.webp"
     },
     {
       "id": 6,
       "question": "Good King Wenceslas was a king of Bohemia in the 10th century. What country is Bohemia now known as?",
       "options": ["Croatia", "Bulgaria", "Hungary", "Czech Republic"],
       "correctAnswer": "Czech Republic",
-      "image": "6.png"
+      "image": "6.webp"
     },
     {
       "id": 7,
       "question": "The dance of the sugar plum fairy is part of which ballet, often performed at Christmas time?",
       "options": ["Sleeping Beauty", "Copellia", "The Nutcracker", "Cinderella"],
       "correctAnswer": "The Nutcracker",
-      "image": "7.png"
+      "image": "7.webp"
     },
     {
       "id": 8,
       "question": "How many varieties of Quality Street are there in a tin?",
       "options": ["8", "9", "11", "13"],
       "correctAnswer": "11",
-      "image": "8.png"
+      "image": "8.webp"
     },
     {
       "id": 9,
       "question": "Which singer has had the most Christmas number one singles with different groups and collaborations?",
       "options": ["Paul McCartney", "Ed Sheeran", "Elton John", "George Michael"],
       "correctAnswer": "Paul McCartney",
-      "image": "9.jpg"
+      "image": "9.webp"
     },
     {
       "id": 10,
       "question": "The snow globe dates back to the 19th century. The first patent was given to Erwin Perzy, whose family still make snow globes to this day, but from which city?",
       "options": ["Budapest", "Munich", "Warsaw", "Vienna"],
       "correctAnswer": "Vienna",
-      "image": "10.jpg"
+      "image": "10.webp"
     },
     {
       "id": 11,
       "question": "Which department store was featured in the movie 'Miracle on 34th Street'?",
       "options": ["Bloomingdales", "Macy's", "Gimbels", "Saks 5th Avenue"],
       "correctAnswer": "Macy's",
-      "image": "11.jpg"
+      "image": "11.webp"
     },
     {
       "id": 12,
       "question": "How many ghosts visit scrooge in 'A Christmas Carol'?",
       "options": ["3", "4", "5", "6"],
       "correctAnswer": "4",
-      "image": "12.jpg"
+      "image": "12.webp"
     },
     {
       "id": 13,
@@ -96,7 +96,7 @@
       "question": "What is 'roasting on an open fire' in the famous song?",
       "options": ["Marshmallows", "Sausages", "Potatoes", "Chestnuts"],
       "correctAnswer": "Chestnuts",
-      "image": "14.jpg"
+      "image": "14.webp"
     },
     {
       "id": 15,
@@ -110,28 +110,28 @@
       "question": "What is the name of the central European folklore figure who punishes misbehaving children during Christmas.",
       "options": ["Krampus", "Jack Frost", "Balthazar", "Grinch"],
       "correctAnswer": "Krampus",
-      "image": "16.png"
+      "image": "16.webp"
     },
     {
       "id": 17,
       "question": "In which pantomime do Wishy Washy and Widow Twanky appear?",
       "options": ["Dick Whittington", "Jack and the beanstalk", "Aladdin", "Beauty and the Beast"],
       "correctAnswer": "Aladdin",
-      "image": "17.jpg"
+      "image": "17.webp"
     },
     {
       "id": 18,
       "question": "Which Canadian superstar had a hit with 'Mistletoe' in 2011?",
       "options": ["Michael Buble", "Avril Lavigne", "Shania Twain", "Justin Beiber"],
       "correctAnswer": "Justin Beiber",
-      "image": "18.jpg"
+      "image": "18.webp"
     },
     {
       "id": 19,
       "question": "How many swans a swimming are there in the 'Twelve days of Christmas'?",
       "options": ["6", "7", "8", "9"],
       "correctAnswer": "7",
-      "image": "19.png"
+      "image": "19.webp"
     },
     {
       "id": 20,
@@ -159,7 +159,7 @@
       "question": "In the nativity story where did Mary & Joseph come from?",
       "options": ["Bethlehem", "Jerusalem", "Damascus", "Nazareth"],
       "correctAnswer": "Nazareth",
-      "image": "23.avif"
+      "image": "23.webp"
     },
     {
       "id": 24,
