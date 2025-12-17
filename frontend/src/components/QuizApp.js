@@ -134,43 +134,54 @@ const QuizApp = () => {
     setIsAnswered(true);
   }, [currentQuestion, selectedAnswer]);
 
-  // Timer effect - single source of truth
-  useEffect(() => {
+  // Function to start the timer
+  const startTimer = useCallback(() => {
     // Clear any existing interval first
     if (timerIntervalRef.current) {
       clearInterval(timerIntervalRef.current);
       timerIntervalRef.current = null;
     }
 
-    // Only run timer if on question screen, not answered, and no answer selected
-    if (screen === 'question' && !isAnswered && !selectedAnswer) {
-      // Start the countdown interval
-      timerIntervalRef.current = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
-            // Time's up - trigger answer submission
-            clearInterval(timerIntervalRef.current);
-            handleAnswer();
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
+    // Start the countdown interval immediately
+    timerIntervalRef.current = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          // Time's up - trigger answer submission
+          clearInterval(timerIntervalRef.current);
+          handleAnswer();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  }, [handleAnswer]);
 
-    // Cleanup interval on unmount or when dependencies change
+  // Stop timer when answer is selected
+  useEffect(() => {
+    if (selectedAnswer || isAnswered) {
+      if (timerIntervalRef.current) {
+        clearInterval(timerIntervalRef.current);
+        timerIntervalRef.current = null;
+      }
+    }
+  }, [selectedAnswer, isAnswered]);
+
+  // Cleanup on unmount
+  useEffect(() => {
     return () => {
       if (timerIntervalRef.current) {
         clearInterval(timerIntervalRef.current);
         timerIntervalRef.current = null;
       }
     };
-  }, [screen, isAnswered, selectedAnswer, currentQuestion, handleAnswer]);
+  }, []);
 
   const handleStart = () => {
     if (userName.trim() && !nameExists) {
       setScreen('question');
       setTimeLeft(20);
+      // Start timer immediately (no delay)
+      startTimer();
     }
   };
 
@@ -186,12 +197,11 @@ const QuizApp = () => {
       setSelectedAnswer('');
       setIsAnswered(false);
       setSparkles([]);
+      setTimeLeft(20);
+      setCurrentQuestion(currentQuestion + 1);
 
-      // Small delay to ensure clean state reset
-      setTimeout(() => {
-        setTimeLeft(20);
-        setCurrentQuestion(currentQuestion + 1);
-      }, 50);
+      // Start timer immediately for next question (no delay)
+      startTimer();
     } else {
       // Always transition to completed screen first
       setScreen('completed');
