@@ -16,15 +16,13 @@ const QuizApp = () => {
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [timeLeft, setTimeLeft] = useState(20);
-  const [timerProgress, setTimerProgress] = useState(100);
   const [isAnswered, setIsAnswered] = useState(false);
   const [leaderboard, setLeaderboard] = useState([]);
   const [error, setError] = useState(null);
-  const timerStartRef = useRef(null);
   const [sparkles, setSparkles] = useState([]);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [existingNames, setExistingNames] = useState([]);
   const [nameExists, setNameExists] = useState(false);
+  const timerIntervalRef = useRef(null);
 
   const fetchLeaderboard = useCallback(async () => {
     try {
@@ -136,58 +134,47 @@ const QuizApp = () => {
     setIsAnswered(true);
   }, [currentQuestion, selectedAnswer]);
 
-  // Initialize timer start time when question starts
+  // Timer effect - single source of truth
   useEffect(() => {
-    if (screen === 'question' && !isAnswered) {
-      timerStartRef.current = Date.now();
-    }
-  }, [currentQuestion, screen, isAnswered]);
-
-  // Countdown timer effect - update both timer and progress together
-  useEffect(() => {
-    if (screen === 'question' && timeLeft > 0 && !isAnswered && !selectedAnswer) {
-      // Start the countdown
-      const timer = setInterval(() => {
+    // Only run timer if on question screen, not answered, and no answer selected
+    if (screen === 'question' && !isAnswered && !selectedAnswer) {
+      // Start the countdown interval
+      timerIntervalRef.current = setInterval(() => {
         setTimeLeft((prev) => {
-          const newTime = prev - 1;
-          // Update progress bar when time decreases
-          setTimerProgress((newTime / 20) * 100);
-          return newTime;
+          if (prev <= 1) {
+            // Time's up - trigger answer submission
+            clearInterval(timerIntervalRef.current);
+            handleAnswer();
+            return 0;
+          }
+          return prev - 1;
         });
       }, 1000);
 
-      return () => clearInterval(timer);
+      // Cleanup interval on unmount or when dependencies change
+      return () => {
+        if (timerIntervalRef.current) {
+          clearInterval(timerIntervalRef.current);
+        }
+      };
     }
-
-    if (timeLeft === 0 && !isAnswered) {
-      setTimerProgress(0);
-      handleAnswer();
-    }
-  }, [timeLeft, screen, isAnswered, selectedAnswer, handleAnswer]);
+  }, [screen, isAnswered, selectedAnswer, handleAnswer]);
 
   const handleStart = () => {
     if (userName.trim() && !nameExists) {
       setScreen('question');
-      setTimerProgress(100);
       setTimeLeft(20);
     }
   };
 
   const handleNext = async () => {
     if (currentQuestion < quizData.questions.length - 1) {
-      // Disable transitions and reset states
-      setIsTransitioning(true);
+      // Reset states for next question
       setSelectedAnswer('');
       setIsAnswered(false);
       setSparkles([]);
       setTimeLeft(20);
-      setTimerProgress(100);
-
-      // Re-enable transitions and move to next question
-      setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentQuestion(currentQuestion + 1);
-      }, 50);
+      setCurrentQuestion(currentQuestion + 1);
     } else {
       // Always transition to completed screen first
       setScreen('completed');
@@ -320,12 +307,12 @@ const QuizApp = () => {
               <div className="flex items-center mb-2">
                 <Timer className="text-green-500 w-6 h-6 mr-1" />
                 <span className="text-green-500 text-xl font-medium mr-4" style={{ minWidth: '1.5rem', display: 'inline-block' }}>{timeLeft}</span>
-                <div className="flex-1 relative h-2 bg-gray-700 rounded">
+                <div className="flex-1 relative h-2 bg-gray-700 rounded overflow-hidden">
                   <div
                     className="absolute inset-y-0 left-0 bg-green-500 rounded"
                     style={{
-                      width: `${timerProgress}%`,
-                      transition: (selectedAnswer || isTransitioning) ? 'none' : 'width 1s linear'
+                      width: `${(timeLeft / 20) * 100}%`,
+                      transition: selectedAnswer ? 'none' : 'width 1s linear'
                     }}
                   />
                 </div>
