@@ -176,12 +176,22 @@ const QuizApp = () => {
 
   const handleNext = async () => {
     if (currentQuestion < quizData.questions.length - 1) {
+      // Clear interval first to stop current timer
+      if (timerIntervalRef.current) {
+        clearInterval(timerIntervalRef.current);
+        timerIntervalRef.current = null;
+      }
+
       // Reset states for next question
       setSelectedAnswer('');
       setIsAnswered(false);
       setSparkles([]);
-      setTimeLeft(20);
-      setCurrentQuestion(currentQuestion + 1);
+
+      // Small delay to ensure clean state reset
+      setTimeout(() => {
+        setTimeLeft(20);
+        setCurrentQuestion(currentQuestion + 1);
+      }, 50);
     } else {
       // Always transition to completed screen first
       setScreen('completed');
@@ -319,7 +329,7 @@ const QuizApp = () => {
                     className="absolute inset-y-0 left-0 bg-green-500 rounded"
                     style={{
                       width: `${(timeLeft / 20) * 100}%`,
-                      transition: selectedAnswer ? 'none' : 'width 1s linear'
+                      transition: (selectedAnswer || timeLeft === 20) ? 'none' : 'width 1s linear'
                     }}
                   />
                 </div>
