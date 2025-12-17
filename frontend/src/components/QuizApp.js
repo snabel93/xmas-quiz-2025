@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Timer, Circle, CircleDot } from 'lucide-react';
 import quizData from '../quiz.json';
 import Snow from './Snow';
@@ -13,6 +13,13 @@ const QuizApp = () => {
   const [sortedLeaderboard, setSortedLeaderboard] = useState([]);
   const [userName, setUserName] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const videoRef = useRef(null);
+
+  // TESTING: Limit to 2 questions
+  const activeQuizData = useMemo(() => {
+    const testQuestions = quizData.questions.slice(0, 2);
+    return { ...quizData, questions: testQuestions };
+  }, []);
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [timeLeft, setTimeLeft] = useState(20);
@@ -63,7 +70,7 @@ const QuizApp = () => {
 
   // Preload all question images
   useEffect(() => {
-    const imagesToPreload = quizData.questions
+    const imagesToPreload = activeQuizData.questions
       .filter(q => q.image)
       .map(q => `/images/${q.image}`);
 
@@ -71,7 +78,7 @@ const QuizApp = () => {
       const img = new Image();
       img.src = src;
     });
-  }, []);
+  }, [activeQuizData]);
 
   const createSparkles = useCallback((event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -112,7 +119,7 @@ const QuizApp = () => {
       createSparkles(event);
 
       // Auto-submit after selecting answer
-      const currentQ = quizData.questions[currentQuestion];
+      const currentQ = activeQuizData.questions[currentQuestion];
       const isCorrect = option === currentQ.correctAnswer;
 
       if (isCorrect) {
@@ -121,10 +128,10 @@ const QuizApp = () => {
 
       setIsAnswered(true);
     }
-  }, [isAnswered, selectedAnswer, createSparkles, currentQuestion]);
+  }, [isAnswered, selectedAnswer, createSparkles, currentQuestion, activeQuizData]);
 
   const handleAnswer = useCallback(() => {
-    const currentQ = quizData.questions[currentQuestion];
+    const currentQ = activeQuizData.questions[currentQuestion];
     const isCorrect = selectedAnswer === currentQ.correctAnswer;
 
     if (isCorrect) {
@@ -132,7 +139,7 @@ const QuizApp = () => {
     }
 
     setIsAnswered(true);
-  }, [currentQuestion, selectedAnswer]);
+  }, [currentQuestion, selectedAnswer, activeQuizData]);
 
   // Function to start the timer
   const startTimer = useCallback(() => {
@@ -186,7 +193,7 @@ const QuizApp = () => {
   };
 
   const handleNext = async () => {
-    if (currentQuestion < quizData.questions.length - 1) {
+    if (currentQuestion < activeQuizData.questions.length - 1) {
       // Clear interval first to stop current timer
       if (timerIntervalRef.current) {
         clearInterval(timerIntervalRef.current);
@@ -203,8 +210,8 @@ const QuizApp = () => {
       // Start timer immediately for next question (no delay)
       startTimer();
     } else {
-      // Always transition to completed screen first
-      setScreen('completed');
+      // Show video before completed screen
+      setScreen('video');
 
       try {
         const response = await fetch(`${API_URL}/score`, {
@@ -308,9 +315,33 @@ const QuizApp = () => {
     );
   }
 
+  // Video Screen
+  if (screen === 'video') {
+    return (
+      <>
+        <Snow />
+        <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
+          <div className="max-w-2xl w-full">
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              onEnded={() => setScreen('completed')}
+              className="w-full rounded-lg"
+              style={{ maxHeight: '80vh', objectFit: 'contain' }}
+            >
+              <source src="/images/thanksforplaying.webm" type="video/webm" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   // Question Screen
   if (screen === 'question') {
-    const currentQ = quizData.questions[currentQuestion];
+    const currentQ = activeQuizData.questions[currentQuestion];
 
     return (
       <div className="min-h-screen bg-gray-900 text-white p-4">
