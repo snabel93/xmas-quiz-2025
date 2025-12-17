@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Timer, Circle, CircleDot } from 'lucide-react';
 import quizData from '../quiz.json';
 import Snow from './Snow';
@@ -15,11 +15,7 @@ const QuizApp = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const videoRef = useRef(null);
 
-  // TESTING: Limit to 2 questions
-  const activeQuizData = useMemo(() => {
-    const testQuestions = quizData.questions.slice(0, 2);
-    return { ...quizData, questions: testQuestions };
-  }, []);
+  const activeQuizData = quizData;
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [timeLeft, setTimeLeft] = useState(20);
@@ -510,7 +506,7 @@ const QuizApp = () => {
             </div>
             <div className="relative">
               <img
-                src="/images/score.jpg"
+                src="/images/score.webp"
                 alt="Complete"
                 className="w-full rounded-lg"
               />
