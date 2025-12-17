@@ -17,8 +17,8 @@
     {
       "id": 3,
       "question": "What kind of Christmas does Elvis sing about in his 1957 hit?",
-      "options": ["White", "Merry", "Rocking", "Blue"],
-      "correctAnswer": "White",
+      "options": ["Happy", "Rocking", "Merry", "Blue"],
+      "correctAnswer": "Blue",
       "image": "3.webp"
     },
     {
@@ -135,8 +135,8 @@
     },
     {
       "id": 20,
-      "question": "How Christmas tree in Trafalgar square is decorated with how many lights?",
-      "options": ["500", "700", "8000", "500000"],
+      "question": "The Christmas tree in Trafalgar square is decorated with how many lights?",
+      "options": ["500", "7000", "80000", "500000"],
       "correctAnswer": "500",
       "image": "20.webp"
     },
@@ -151,7 +151,7 @@
       "id": 22,
       "question": "How many households will Santa Visit this year? (Allegedly)",
       "options": ["250 million", "310 million", "380 million", "420 million"],
-      "correctAnswer": "380 million",
+      "correctAnswer": "310 million",
       "image": "22.webp"
     },
     {
@@ -170,7 +170,7 @@
     },
     {
       "id": 25,
-      "question": "What gas do Brussel Sprouts produce?",
+      "question": "What Gas do Brussel Sprouts produce?",
       "options": ["Hydrogen", "Methane", "Carbon Dioxide", "All three"],
       "correctAnswer": "All three",
       "image": "25.webp"
